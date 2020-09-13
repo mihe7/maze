@@ -8,9 +8,7 @@ public class MazeGame {
     public MazeWorld getWorld() { return world; }
 
     public boolean isWin() {
-        Maze maze = world.getMaze();
-        Position player = world.getPlayer();
-        return maze.get(player.x, player.y) == FieldType.FINISH;
+        return world.isPlayerOn(FieldType.FINISH);
     }
 
     public void movePlayer(int dx, int dy) {

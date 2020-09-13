@@ -20,6 +20,10 @@ public class MazeWorld {
     private boolean isLegalMove(Position pos) {
         return maze.contains(pos) &&
                 maze.get(pos.x, pos.y) != FieldType.WALL;
-    }  
+    }
+
+    public boolean isPlayerOn(FieldType type) {
+        return maze.get(player.x, player.y) == type;
+    }
 }
 
