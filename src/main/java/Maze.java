@@ -25,5 +25,9 @@ public class Maze {
         return pos.x >= 0 && pos.x < size.width &&
                 pos.y >= 0 && pos.y < size.height;
     }
+
+    public boolean hasTypeAt(FieldType type, Position pos) {
+        return contains(pos) && get(pos.x, pos.y) == type;
+    }
 }
 
