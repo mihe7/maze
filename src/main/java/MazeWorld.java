@@ -10,7 +10,7 @@ public class MazeWorld {
     public Maze getMaze() { return maze; }
     public Position getPlayer() { return player; }
 
-    public void move(int dx, int dy) {
+    public void movePlayer(int dx, int dy) {
         Position newPos = player.move(dx, dy);
         if (isLegalMove(newPos)) {
             player = newPos;
