@@ -2,17 +2,13 @@ import java.awt.Image;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-public abstract class WorldViewDefaults {
-    public static final Image DESERT;
-    public static final Image WALL;
-    public static final Image FINISH;
-    public static final Image PLAYER;
+public final class WorldViewDefaults {
+    public static final Image DESERT = getImage("desert.png");
+    public static final Image WALL = getImage("wall.png");
+    public static final Image FINISH = getImage("finish.png");
+    public static final Image PLAYER = getImage("player.png");
 
-    static {
-        DESERT = getImage("desert.png");
-        WALL = getImage("wall.png");
-        FINISH = getImage("finish.png");
-        PLAYER = getImage("player.png");
+    private WorldViewDefaults() {
     }
 
     private static Image getImage(String name) {
