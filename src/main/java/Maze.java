@@ -16,5 +16,10 @@ public class Maze {
     public int getHeight() { return fields.length; }
     public int getWidth() { return getHeight() == 0 ? 0 : fields[0].length; }   
     public FieldType get(int x, int y) { return fields[y][x]; }            
+
+    public boolean contains(Position pos) {
+        return pos.x >= 0 && pos.x < getWidth() &&
+                pos.y >= 0 && pos.y < getHeight();
+    }
 }
 

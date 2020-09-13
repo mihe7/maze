@@ -18,12 +18,8 @@ public class MazeWorld {
     }
     
     private boolean isLegalMove(Position pos) {
-        if (pos.x < 0 || pos.x >= maze.getWidth() ||
-                pos.y < 0 || pos.y >= maze.getHeight()) {
-            return false;
-        }
-
-        return maze.get(pos.x, pos.y) != FieldType.WALL;
+        return maze.contains(pos) &&
+                maze.get(pos.x, pos.y) != FieldType.WALL;
     }  
 }
 
