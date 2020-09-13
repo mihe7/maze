@@ -1,5 +1,6 @@
 public class Maze {
     private final FieldType[][] fields;
+    private final Size size;
 
     public Maze(FieldType[][] fields) {
         int height = fields.length;
@@ -11,15 +12,18 @@ public class Maze {
                 this.fields[y][x] = fields[y][x];
             }
         }
+
+        size = new Size(width, height);
     }
 
-    public int getHeight() { return fields.length; }
-    public int getWidth() { return getHeight() == 0 ? 0 : fields[0].length; }   
+    public int getHeight() { return size.height; }
+    public int getWidth() { return size.width; }
+    public Size getSize() { return size; }
     public FieldType get(int x, int y) { return fields[y][x]; }            
 
     public boolean contains(Position pos) {
-        return pos.x >= 0 && pos.x < getWidth() &&
-                pos.y >= 0 && pos.y < getHeight();
+        return pos.x >= 0 && pos.x < size.width &&
+                pos.y >= 0 && pos.y < size.height;
     }
 }
 
