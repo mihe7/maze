@@ -11,10 +11,6 @@ public class Position {
         return new Position(x + dx, y + dy);
     }
 
-    public Position move(Position delta) {
-        return new Position(x + delta.x, y + delta.y);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o == null || o == this || !(o instanceof Position)) {
