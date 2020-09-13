@@ -8,8 +8,7 @@ import java.util.EnumMap;
 import java.util.Map;
 
 public class WorldView extends JComponent {
-    private final int tileWidth;
-    private final int tileHeight;
+    private final Size tileSize;
 
     private final Map<FieldType, Image> images = new EnumMap<>(FieldType.class);
     private Image player;
@@ -17,9 +16,12 @@ public class WorldView extends JComponent {
     private MazeWorld world;
     
     public WorldView(MazeWorld world, int tileWidth, int tileHeight) {
+        this(world, new Size(tileWidth, tileHeight));
+    }
+
+    public WorldView(MazeWorld world, Size tileSize) {
         this.world = world;
-        this.tileWidth = tileWidth;
-        this.tileHeight = tileHeight;
+        this.tileSize = tileSize;
     }
 
     @Override
@@ -28,10 +30,11 @@ public class WorldView extends JComponent {
             return super.getPreferredSize();
         }
         Insets insets = getInsets();
+        Size mazeSize = world.getMaze().getSize();
         int w = insets.left + insets.right + 
-                tileWidth * world.getMaze().getWidth();
+                tileSize.width * mazeSize.width;
         int h = insets.top + insets.bottom + 
-                tileHeight * world.getMaze().getHeight();
+                tileSize.height * mazeSize.height;
         return new Dimension(w, h);
     }
 
@@ -51,9 +54,10 @@ public class WorldView extends JComponent {
     }
 
     private Image requireCompatibleImage(Image image) {
-        if (image.getWidth(null) != tileWidth || image.getHeight(null) != tileHeight) {
+        if (image.getWidth(null) != tileSize.width || 
+                image.getHeight(null) != tileSize.height) {
             String fmt = "Given image doesn't match tile size (%d, %d)";
-            String msg = String.format(fmt, tileWidth, tileHeight);
+            String msg = String.format(fmt, tileSize.width, tileSize.height);
             throw new IllegalArgumentException(msg);
         }
         return image;
@@ -67,11 +71,12 @@ public class WorldView extends JComponent {
 
     private void paintMap(Graphics g) {
         Maze maze = world.getMaze();
-        for (int y = 0, n = maze.getHeight(); y < n; y++) {
-            for (int x = 0, m = maze.getWidth(); x < m; x++) {
+        Size mazeSize = maze.getSize();
+        for (int y = 0; y < mazeSize.height; y++) {
+            for (int x = 0; x < mazeSize.width; x++) {
                 Image img = images.get(maze.get(x, y));
                 if (img != null) {
-                    g.drawImage(img, x * tileWidth, y * tileHeight, null);
+                    paintImage(g, img, x, y);
                 }
             }
         }
@@ -83,7 +88,11 @@ public class WorldView extends JComponent {
         }
 
         Position pos = world.getPlayer();
-        g.drawImage(player, pos.x * tileWidth, pos.y * tileHeight, null);
+        paintImage(g, player, pos.x, pos.y);
+    }
+
+    private void paintImage(Graphics g, Image img, int xTile, int yTile) {
+        g.drawImage(img, xTile * tileSize.width, yTile * tileSize.height, null);
     }
 }
 
