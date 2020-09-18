@@ -14,6 +14,12 @@ public class WorldView extends JComponent {
     private Image player;
 
     private MazeWorld world;
+    private MazeWorldObserver observer = new MazeWorldObserver() {
+        @Override
+        public void playerMoved(Position from, Position to) {
+            repaint();
+        }
+    };
     
     public WorldView(MazeWorld world, int tileWidth, int tileHeight) {
         this(world, new Size(tileWidth, tileHeight));
@@ -22,6 +28,7 @@ public class WorldView extends JComponent {
     public WorldView(MazeWorld world, Size tileSize) {
         this.world = world;
         this.tileSize = tileSize;
+        installObserver();
     }
 
     @Override
@@ -39,8 +46,22 @@ public class WorldView extends JComponent {
     }
 
     public void changeWorld(MazeWorld world) {
+        uninstallObserver();
         this.world = world;
+        installObserver();
         repaint();
+    }
+
+    private void uninstallObserver() {
+        if (world != null) {
+            world.setObserver(null);
+        }
+    }
+
+    private void installObserver() {
+        if (world != null) {
+            world.setObserver(observer);
+        }
     }
 
     public void setImage(FieldType type, Image image) {
