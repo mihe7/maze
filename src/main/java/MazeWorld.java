@@ -1,10 +1,15 @@
 public class MazeWorld {
-    private Maze maze;
+    private final Maze maze;
     private Position player;
+    private MazeWorldObserver observer;
 
     public MazeWorld(Maze maze, Position player) {
         this.maze = maze;
         this.player = player;
+    }
+
+    public void setObserver(MazeWorldObserver observer) {
+        this.observer = observer;
     }
 
     public Maze getMaze() { return maze; }
@@ -13,7 +18,15 @@ public class MazeWorld {
     public void movePlayer(int dx, int dy) {
         Position newPos = player.move(dx, dy);
         if (isLegalMove(newPos)) {
+            Position oldPos = player;
             player = newPos;
+            movedFrom(oldPos);
+        }
+    }
+
+    private void movedFrom(Position oldPos) {
+        if (observer != null) {
+            observer.playerMoved(oldPos, player);
         }
     }
     
