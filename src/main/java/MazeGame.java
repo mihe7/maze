@@ -23,7 +23,7 @@ public class MazeGame {
 
         world.movePlayer(dx, dy);
 
-        if (isWin()) {
+        if (observer != null && isWin()) {
             observer.gameOver();
         }
     }
