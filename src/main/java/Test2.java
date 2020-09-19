@@ -21,10 +21,10 @@ public class Test2 {
             }
 
             switch(move) {
-                case 'u': world.movePlayer(0, -1); break;
-                case 'd': world.movePlayer(0, 1); break;
-                case 'l': world.movePlayer(-1, 0); break;
-                case 'r': world.movePlayer(1, 0); break;
+                case 'u': world.movePlayer(Direction.NORTH); break;
+                case 'd': world.movePlayer(Direction.SOUTH); break;
+                case 'l': world.movePlayer(Direction.WEST); break;
+                case 'r': world.movePlayer(Direction.EAST); break;
                 case 'q': done = true; break;
                 default:
                     System.out.println("Bitte nur u/d/l/r verwenden. Ende mit q.");

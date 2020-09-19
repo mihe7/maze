@@ -20,10 +20,10 @@ public class Test3 {
             }
 
             switch(move) {
-                case 'u': game.movePlayer(0, -1); break;
-                case 'd': game.movePlayer(0, 1); break;
-                case 'l': game.movePlayer(-1, 0); break;
-                case 'r': game.movePlayer(1, 0); break;
+                case 'u': game.movePlayer(Direction.NORTH); break;
+                case 'd': game.movePlayer(Direction.SOUTH); break;
+                case 'l': game.movePlayer(Direction.WEST); break;
+                case 'r': game.movePlayer(Direction.EAST); break;
                 default:
                     System.out.println("Bitte nur u/d/l/r verwenden.");
             }

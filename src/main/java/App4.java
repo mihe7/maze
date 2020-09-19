@@ -19,19 +19,21 @@ public class App4 {
     private KeyListener keyboardController = new KeyAdapter() {
         @Override
         public void keyPressed(KeyEvent e) {
-            int dx = 0, dy = 0;
+            Direction dir = null;
 
             switch (e.getKeyCode()) {
-                case KeyEvent.VK_LEFT:  dx--; break;
-                case KeyEvent.VK_RIGHT: dx++; break;
-                case KeyEvent.VK_UP:    dy--; break;
-                case KeyEvent.VK_DOWN:  dy++; break;
+                case KeyEvent.VK_LEFT:  dir = Direction.WEST; break;
+                case KeyEvent.VK_RIGHT: dir = Direction.EAST; break;
+                case KeyEvent.VK_UP:    dir = Direction.NORTH; break;
+                case KeyEvent.VK_DOWN:  dir = Direction.SOUTH; break;
                 default:
                     return;
             }
 
-            game.movePlayer(dx, dy);
-            worldView.repaint();
+            if (dir != null) {
+                game.movePlayer(dir);
+                worldView.repaint();
+            }
 
             if (game.isWin()) {
                 winnerMessage.show();
