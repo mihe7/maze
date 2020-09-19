@@ -16,12 +16,12 @@ public class MazeGame {
         return world.isPlayerOn(FieldType.FINISH);
     }
 
-    public void movePlayer(int dx, int dy) {
+    public void movePlayer(Direction dir) {
         if (isWin()) {
             return;
         }
 
-        world.movePlayer(dx, dy);
+        world.movePlayer(dir);
 
         if (observer != null && isWin()) {
             observer.gameOver();

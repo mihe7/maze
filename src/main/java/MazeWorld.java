@@ -15,8 +15,8 @@ public class MazeWorld {
     public Maze getMaze() { return maze; }
     public Position getPlayer() { return player; }
 
-    public void movePlayer(int dx, int dy) {
-        Position newPos = player.move(dx, dy);
+    public void movePlayer(Direction dir) {
+        Position newPos = dir.move(player);
         if (isLegalMove(newPos)) {
             Position oldPos = player;
             player = newPos;
