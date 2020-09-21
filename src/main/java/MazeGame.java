@@ -12,6 +12,13 @@ public class MazeGame {
 
     public MazeWorld getWorld() { return world; }
 
+    public void setWorld(MazeWorld world) {
+        this.world = world;
+        if (observer != null) {
+            observer.worldChanged(world);
+        }
+    }
+
     public boolean isWin() {
         return world.isPlayerOn(FieldType.FINISH);
     }
