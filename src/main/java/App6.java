@@ -22,6 +22,8 @@ public class App6 {
         public void gameOver() {
             winnerMessage.show();
         }
+        @Override
+        public void worldChanged(MazeWorld world) {}
     };
 
     public void run() {
